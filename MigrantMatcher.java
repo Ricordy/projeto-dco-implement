@@ -17,15 +17,22 @@ public class MigrantMatcher{
             
             //Se user for voluntario
             if(src.nextLine() == "v" || src.nextLine() == "voluntario"){
-                System.out.println("Por favor identifique-se usando o seu numero de telemovel:");
-                try {
-                    int phoneNumber = src.nextInt();
-                } catch (NumberFormatException e){
-                    System.out.println(e.getMessage());
-                    System.out.println("Por favor insira um inteiro");
+                
+                boolean isValidNumber = true;
+                while(isValidNumber){
+                    //Identificação por telemovel. Guardar os dados localmente em ficheiros.
+                    System.out.println("Por favor identifique-se usando o seu numero de telemovel:");
+                    try {
+                        int phoneNumber = src.nextInt();
+                        
+                    } catch (NumberFormatException e){
+                        System.out.println(e.getMessage());
+                        System.out.println("Por favor insira um inteiro");
 
+                    }
+
+                    
                 }
-
 
 
 
