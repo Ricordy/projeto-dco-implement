@@ -5,6 +5,7 @@ public class MigrantMatcher{
     public static void main(String[] agrs){
 
         Scanner src = new Scanner(System.in);
+        UsersHandler activeUser;
 
         boolean isRunning = true;
         while(isRunning){
@@ -24,6 +25,7 @@ public class MigrantMatcher{
                     System.out.println("Por favor identifique-se usando o seu numero de telemovel:");
                     try {
                         int phoneNumber = src.nextInt();
+                        activeUser = new UsersHandler(phoneNumber);
                         
                     } catch (NumberFormatException e){
                         System.out.println(e.getMessage());
