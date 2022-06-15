@@ -26,6 +26,7 @@ public class MigrantMatcher{
                     try {
                         int phoneNumber = src.nextInt();
                         activeUser = new UsersHandler(phoneNumber);
+                        isValidNumber = false;
                         
                     } catch (NumberFormatException e){
                         System.out.println(e.getMessage());

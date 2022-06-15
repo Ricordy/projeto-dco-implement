@@ -22,7 +22,7 @@ public class UsersHandler{
 
     //Criar objeto migrante
     public Migrant createMigrant(UsersHandler user) {
-        Migrant novoMigrante = new Migrant(user.phoneNumber);
+        Migrant novoMigrante = new Migrant(user.name, user.phoneNumber);
         return novoMigrante;
     }
 
