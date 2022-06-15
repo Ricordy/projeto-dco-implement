@@ -8,7 +8,6 @@ public class MigrantMatcher{
         UsersHandler activeUser;
 
         Storager sto = new Storager();
-        sto.createCsv("/Users/rodrigobarrocas/Desktop/dco-projeto/projeto-dco-implement/oi.csv");
 
 
 
@@ -18,16 +17,15 @@ public class MigrantMatcher{
             
             //Introdução e selecionar tipo de user
             System.out.println("Bem-Vindo ao MigrantMatcher");
-            System.out.println("Vai queres connectar-se como voluntário(v) ou migrante?(m)");
-            sto.createCsv("oi2.csv");
+            System.out.print("Vai querer connectar-se como voluntário(v) ou migrante?(m): ");
+
             
             String g = src.next();
-            System.out.println(g);
             switch(g){
                 
                 case "v":
 
-                    System.out.println("oi");
+                    System.out.println("Bem-Vindo Voluntário!");
                     boolean isValidNumber = true;
                     while(isValidNumber){
                         //Identificação por telemovel. Guardar os dados localmente em ficheiros.
@@ -35,6 +33,7 @@ public class MigrantMatcher{
                         try {
                             int phoneNumber = src.nextInt();
                             activeUser = new UsersHandler(phoneNumber);
+                            activeUser.createVolunteer(activeUser);
                             isValidNumber = false;
                         
                         } catch (NumberFormatException e){
