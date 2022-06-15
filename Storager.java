@@ -1,6 +1,7 @@
 import java.io.BufferedReader;  
 import java.io.FileReader;  
-import java.io.BufferedWriter;  
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;  
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,9 @@ public class Storager {
     BufferedReader csvReader;
     BufferedWriter csvWriter;
 
+    public  Storager(){
 
+    }
 
     //No caso de se criar a primeira instancia para um voluntário
     public Storager (String identificador, String phoneNumber, String csvAttatched){
@@ -85,10 +88,21 @@ public class Storager {
 
         content.add(contentToAdd);
 
+        
+
 
         try {
             csvWriter = new BufferedWriter(new FileWriter(path));
-            csvWriter.
+            
+            
+            //Transformar String[]... em String1,String2,String3,... e escrever 
+            for(String[] line:content){
+                String toWrite = String.join(",", line[0], line[1], line[2],line[3]);
+                csvWriter.write(toWrite);
+
+
+            }
+            
         } catch (Exception e) {
             //TODO: handle exception
         }
@@ -98,6 +112,17 @@ public class Storager {
 
         
  
+    }
+
+    public void createCsv(String name){
+        File csvFile = new File(name);
+        try {
+            csvFile.createNewFile();
+            System.out.println("CSV Sucessefuly created at: " + name);
+        } catch (Exception e) {
+            System.out.println("Erro na criação do csv");
+        }
+
     }
 
 
