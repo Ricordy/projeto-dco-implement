@@ -33,7 +33,8 @@ public class MigrantMatcher{
                         try {
                             int phoneNumber = src.nextInt();
                             activeUser = new UsersHandler(phoneNumber);
-                            activeUser.createVolunteer(activeUser);
+                            Volunteer user = activeUser.createVolunteer(activeUser);
+                            
                             isValidNumber = false;
                         
                         } catch (NumberFormatException e){

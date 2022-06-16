@@ -125,6 +125,26 @@ public class Storager {
 
     }
 
+    public List<String[]> readFile(String path){
+        List<String[]> content = new ArrayList<>();
+        
+
+        //Ler o ficheiro e guardar em content -> ArrayList
+        try {
+            csvReader = new BufferedReader(new FileReader(path));
+            String line = "";
+            while ((line = csvReader.readLine()) != null) {
+                content.add(line.split(","));
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Não foi possivel ler o ficheiro! caminho:" +path);
+        }
+
+        return content;
+    }
+
 
 
 
