@@ -6,6 +6,7 @@ public class MigrantMatcher{
 
         Scanner src = new Scanner(System.in);
         UsersHandler activeUser;
+        boolean isValidNumber;
 
         Storager sto = new Storager();
 
@@ -26,7 +27,10 @@ public class MigrantMatcher{
                 case "v":
 
                     System.out.println("Bem-Vindo Voluntário!");
-                    boolean isValidNumber = true;
+                    isValidNumber = true;
+
+
+                    //Loggar user
                     while(isValidNumber){
                         //Identificação por telemovel. Guardar os dados localmente em ficheiros.
                         System.out.println("Por favor identifique-se usando o seu numero de telemovel:");
@@ -34,7 +38,40 @@ public class MigrantMatcher{
                             int phoneNumber = src.nextInt();
                             activeUser = new UsersHandler(phoneNumber);
                             Volunteer user = activeUser.createVolunteer(activeUser);
+
+                            System.out.println("Bem vindo ID/NumeroTelemovel: " + user.phoneNumber);
+
+                            isValidNumber = false;
+                        
+                        } catch (NumberFormatException e){
+                            System.out.println(e.getMessage());
+                            System.out.println("Por favor insira um inteiro");
+
+                        }                        
+                    }
+
+                    
+
+                    break;
+
+                case "m":
+                    System.out.println("Bem-Vindo Migrante!");
+                    isValidNumber = true;
+
+
+                    //Loggar user
+                    while(isValidNumber){
+                        //Identificação por telemovel. Guardar os dados localmente em ficheiros.
+                        System.out.println("Por favor identifique-se usando o seu numero de nome, telemovel(Formato: 'nome,numero')");
+                        String userInfoMeta = src.next();
+                        try {
                             
+                            String[] userInfo = userInfoMeta.split(",", 2);
+
+                            activeUser = new UsersHandler(Integer.parseInt(userInfo[1]), userInfo[0]);
+                            Migrant user = activeUser.createMigrant(activeUser);
+                            System.out.println("Bem vindo: " + user.name + "! ID/NumeroTelemovel: " + user.phoneNumber);
+
                             isValidNumber = false;
                         
                         } catch (NumberFormatException e){
@@ -46,10 +83,13 @@ public class MigrantMatcher{
                         
                     }
 
-                case "m":
+                    break;
 
 
                 default:
+
+
+                break;
 
             }    
 
