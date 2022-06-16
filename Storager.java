@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -176,8 +177,6 @@ public class Storager {
 
     }
 
-    
-
 
     /**
      * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv
@@ -290,6 +289,18 @@ public class Storager {
         }
 
         return content;
+    }
+
+    public String[] listaFilesAtPath(String path){
+        File numFiles = new File(path);
+        File contents[]= numFiles.listFiles();
+        String numeroFicheiros[] = new String[contents.length];
+        int i = 0;
+        for(File file: contents){
+            numeroFicheiros[i] = file.toString();
+            i++;
+        } 
+        return numeroFicheiros;
     }
 
     // Setters and getters;
