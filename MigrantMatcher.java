@@ -40,6 +40,7 @@ public class MigrantMatcher {
                             int phoneNumber = src.nextInt();
                             activeUser = new UsersHandler(phoneNumber);
                             Volunteer user = activeUser.createVolunteer(activeUser);
+                            
 
                             System.out.println("Bem vindo ID/NumeroTelemovel: " + user.phoneNumber + "!");
                             sto = new Storager("v", String.valueOf(user.phoneNumber), String.valueOf(user.phoneNumber));
@@ -150,4 +151,4 @@ public class MigrantMatcher {
 
         }
     }
-}
+} 
