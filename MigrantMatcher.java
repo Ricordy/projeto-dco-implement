@@ -1,9 +1,13 @@
+import java.util.Random;
 import java.util.Scanner;
+;
+
 
 public class MigrantMatcher {
     public static void main(String[] agrs) {
 
         Scanner src = new Scanner(System.in);
+        
         UsersHandler activeUser;
         boolean isValidNumber;
 
@@ -42,7 +46,7 @@ public class MigrantMatcher {
                             activeUser.createVolunteer();
 
 
-                            String path = user.phoneNumber;
+                            String path = "data/usersData/"+activeUser.phoneNumber+".csv";
                 
 
                             System.out.println("Bem vindo ID/NumeroTelemovel: " + activeUser.phoneNumber + "!");
@@ -87,8 +91,15 @@ public class MigrantMatcher {
                                     help = new HelpHandler("c", lotacao, regiao);
                                     help.creaAlojamento();
                                     helpTimeAndDate = System.currentTimeMillis();
-                                    path += sto.phoneNumber+".csv";
+                                    
+                                    //Generate random name for file
+                                    Random rand = new Random();
+                                    int ticketNumber = rand.nextInt(999999)
+
+
+                                    path += ticketNumber+".csv";
                                     sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+
                                     
 
 
