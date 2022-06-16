@@ -73,9 +73,14 @@ public class MigrantMatcher {
                                     break;
 
                                 case 2:
+                                    HelpHandler help;
+                                    System.out.println("Por favor indique que item pretende doar.");
+                                    String item = src.next();
+                                    System.out.println("Por favor diga a quantidade de item que pretende doar.");
+                                    int quantidade = src.nextInt();
+                                    help = new HelpHandler("i", quantidade, item);
+                                    help.createItem();
 
-
-                                    
 
                                     break;
 
