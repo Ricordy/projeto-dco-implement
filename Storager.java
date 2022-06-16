@@ -2,7 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;  
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;  
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,10 @@ public class Storager {
 
     //Utilização geral
     BufferedReader csvReader;
-    BufferedWriter csvWriter;
+    PrintWriter csvWriter;
+
+
+
 
     public  Storager(){
 
@@ -68,7 +72,9 @@ public class Storager {
             String line = "";
             while ((line = csvReader.readLine()) != null) {
                 content.add(line.split(","));
+                System.out.println(content.toString());
             }
+
             
         } catch (Exception e) {
             //TODO: handle exception
@@ -92,7 +98,7 @@ public class Storager {
 
 
         try {
-            csvWriter = new BufferedWriter(new FileWriter(path));
+            csvWriter = new PrintWriter(new File(path));
             
             
             //Transformar String[]... em String1,String2,String3,... e escrever 
@@ -142,6 +148,8 @@ public class Storager {
             }
             
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Não foi possivel ler o ficheiro");
             //TODO: handle exception
         }
 
@@ -163,19 +171,36 @@ public class Storager {
 
 
         try {
-            csvWriter = new BufferedWriter(new FileWriter(path));
+            csvWriter = new PrintWriter(new File(path));
             
             
             //Transformar String[]... em String1,String2,String3,... e escrever 
-            for(String[] line:content){
-                String toWrite = String.join(",", line[0], line[1], line[2],line[3]);
-                csvWriter.write(toWrite);
+            if(content.size() == 1){
+                String toWrite =  contentToAdd[0] +","+ contentToAdd[1]+","+ contentToAdd[2]+","+contentToAdd[3] ;
+                System.out.println(toWrite + " at path: " +path);
+                csvWriter.write(toWrite+ '\n');
 
+            }else{
+                content.forEach((line) -> {
+                    String toWrite =  line[0] +","+ line[1]+","+ line[2]+","+line[3] ;
+                    
+                    System.out.println(toWrite + " at path: " +path);
+                    csvWriter.write(toWrite+ '\n');
+    
+    
+                });
+    
 
             }
+
+            csvWriter.close();
+
+
+            
             
         } catch (Exception e) {
-            //TODO: handle exception
+            System.out.println(e.getMessage());
+            System.out.println("Não foi possivel ecrever no ficheiro");
         }
 
 

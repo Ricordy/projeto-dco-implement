@@ -7,7 +7,15 @@ public class MigrantMatcher {
         UsersHandler activeUser;
         boolean isValidNumber;
 
+
         Storager sto = new Storager();
+
+
+        HelpHandler help;
+        long helpTimeAndDate;
+
+
+
 
         boolean isRunning = true;
         while (isRunning) {
@@ -34,6 +42,7 @@ public class MigrantMatcher {
                             Volunteer user = activeUser.createVolunteer(activeUser);
 
                             System.out.println("Bem vindo ID/NumeroTelemovel: " + user.phoneNumber + "!");
+                            sto = new Storager("v", String.valueOf(user.phoneNumber), String.valueOf(user.phoneNumber));
 
                             isValidNumber = false;
 
@@ -57,29 +66,39 @@ public class MigrantMatcher {
                         case 1:
                             System.out.println("(1) Fornecer casa.");
                             System.out.println("(2) Oferecer item.");
+                            System.out.println("Qualquer outro inputa para voltar");
                             switch(src.nextInt()){
 
                                 case 1:
-                                    HelpHandler help;
+                                    
                                     System.out.println("Por-favor indique a região da casa.");
                                     String regiao = src.next();
                                     System.out.println("Por-favor indique a lotação da casa.");
                                     int lotacao = src.nextInt();
-                                    help = new HelpHandler("c", 0, regiao);
-                                    help.creaAlojamento(lotacao);
+
+                                    String path = "data/helpData/";
+
+                                    help = new HelpHandler("c", lotacao, regiao);
+                                    help.creaAlojamento();
+                                    helpTimeAndDate = System.currentTimeMillis();
+                                    path += sto.phoneNumber+".csv";
+                                    sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+                                    
+
 
 
 
                                     break;
 
                                 case 2:
-                                    HelpHandler help;
+                                
                                     System.out.println("Por favor indique que item pretende doar.");
                                     String item = src.next();
                                     System.out.println("Por favor diga a quantidade de item que pretende doar.");
                                     int quantidade = src.nextInt();
                                     help = new HelpHandler("i", quantidade, item);
                                     help.createItem();
+                                    helpTimeAndDate = System.currentTimeMillis();
 
 
                                     break;
