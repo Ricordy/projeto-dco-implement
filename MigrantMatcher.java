@@ -8,7 +8,7 @@ public class MigrantMatcher {
 
         Scanner src = new Scanner(System.in);
         
-        UsersHandler activeUser;
+        UsersHandler activeUser = new UsersHandler(0);
         boolean isValidNumber;
 
 
@@ -49,25 +49,18 @@ public class MigrantMatcher {
                             String path = "data/usersData/"+activeUser.phoneNumber+".csv";
                 
 
-                            System.out.println("Bem vindo ID/NumeroTelemovel: " + activeUser.phoneNumber + "!");
+                            
                             sto = new Storager("v", String.valueOf(activeUser.phoneNumber), String.valueOf(activeUser.phoneNumber));
                             sto.writeToFileUserInfo(path);
 
-                            isValidNumber = false;
+                            System.out.println("Bem vindo ID/NumeroTelemovel: " + activeUser.phoneNumber + "!");
 
-                        } catch (NumberFormatException e) {
-                            System.out.println(e.getMessage());
-                            System.out.println("Por favor insira um inteiro");
-
-                        }
-                    }
-
-                    /*
-                     * Menu de Voluntário!
-                     */
-                    System.out.println("    ->(1) Registar Ajuda.");
-                    System.out.println("    ->(2) Histórico de Ajudas.");
-                    switch (src.nextInt()) {
+                             /*
+                        * Menu de Voluntário!
+                        */
+                        System.out.println("    ->(1) Registar Ajuda.");
+                        System.out.println("    ->(2) Histórico de Ajudas.");
+                        switch (src.nextInt()) {
 
                         /*
                          * Registar ajuda Utilizador deve indicar o tipo de ajuda e efetuar
@@ -86,7 +79,7 @@ public class MigrantMatcher {
                                     System.out.println("Por-favor indique a lotação da casa.");
                                     int lotacao = src.nextInt();
 
-                                    String path = "data/helpData/";
+                                    path = "data/helpData/";
 
                                     help = new HelpHandler("c", lotacao, regiao);
                                     help.creaAlojamento();
@@ -94,11 +87,13 @@ public class MigrantMatcher {
                                     
                                     //Generate random name for file
                                     Random rand = new Random();
-                                    int ticketNumber = rand.nextInt(999999)
+                                    int ticketNumber = rand.nextInt(999999);
 
 
                                     path += ticketNumber+".csv";
                                     sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+                                    sto.writeToUserFileListOfHelp("data/usersData/"+activeUser.phoneNumber+".csv", String.valueOf(ticketNumber), help.type);
+                                    
 
                                     
 
@@ -124,6 +119,18 @@ public class MigrantMatcher {
 
                             break;
                     }
+
+                            isValidNumber = false;
+                            
+                        } catch (NumberFormatException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Por favor insira um inteiro");
+
+                        }
+                        
+                    }
+
+                   
 
 
                     break;
@@ -159,6 +166,9 @@ public class MigrantMatcher {
                     break;
 
                 default:
+
+                    isRunning = false;
+                    src.close();
 
                     break;
 

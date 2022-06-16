@@ -18,6 +18,7 @@ public class Storager {
     // Utilização geral
     BufferedReader csvReader;
     PrintWriter csvWriter;
+    String[] contentToAdd;
 
     public Storager() {
 
@@ -50,7 +51,7 @@ public class Storager {
     //
     public void writeToFileUserInfo(String path) {
         List<String[]> content = new ArrayList<>();
-        String[] contentToAdd = new String[4];
+        contentToAdd = new String[4];
 
         // Ler todo o conteudo pré-existente no ficheiro.
 
@@ -119,7 +120,7 @@ public class Storager {
     public void writeToFileUserHelp(String path, String tipoAjuda, String localItem, String lotQuantidade,
             String data) {
         List<String[]> content = new ArrayList<>();
-        String[] contentToAdd = new String[4];
+        contentToAdd = new String[4];
 
         // Ler todo o conteudo pré-existente no ficheiro.
 
@@ -142,6 +143,77 @@ public class Storager {
         contentToAdd[1] = localItem;
         contentToAdd[2] = lotQuantidade;
         contentToAdd[3] = data;
+
+        content.add(contentToAdd);
+
+        try {
+            csvWriter = new PrintWriter(new File(path));
+
+            // Transformar String[]... em String1,String2,String3,... e escrever
+            if (content.size() == 1) {
+                String toWrite = contentToAdd[0] + "," + contentToAdd[1] + "," + contentToAdd[2] + ","
+                        + contentToAdd[3];
+                System.out.println(toWrite + " at path: " + path);
+                csvWriter.write(toWrite + '\n');
+
+            } else {
+                content.forEach((line) -> {
+                    String toWrite = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
+
+                    System.out.println(toWrite + " at path: " + path);
+                    csvWriter.write(toWrite + '\n');
+
+                });
+
+            }
+
+            csvWriter.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Não foi possivel ecrever no ficheiro");
+        }
+
+    }
+
+
+    /**
+     * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv
+     * pretendido (path).
+     * 
+     * @param path
+     * @param tipoAjuda     "c" ou "i"
+     * @param localItem     "localDaCasa" ou "nomeDoItem"
+     * @param lotQuantidade "lotacaoDaCasa" ou "quantidadeDeItens"
+     * @param data          "data da oferta"
+     */
+    //
+    public void writeToUserFileListOfHelp(String path, String idTicket, String tipoAjuda) {
+        List<String[]> content = new ArrayList<>();
+        contentToAdd = new String[4];
+
+        // Ler todo o conteudo pré-existente no ficheiro.
+
+        try {
+            csvReader = new BufferedReader(new FileReader(path));
+            String line = "";
+            while ((line = csvReader.readLine()) != null) {
+                content.add(line.split(","));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Não foi possivel ler o ficheiro");
+            // TODO: handle exception
+        }
+
+        // Escrever o conteudo pretendido no ficheiro
+
+        contentToAdd[0] = idTicket;
+        contentToAdd[1] = tipoAjuda;
+        contentToAdd[2] = "null";
+        contentToAdd[3] = "null";
+
 
         content.add(contentToAdd);
 
