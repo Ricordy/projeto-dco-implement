@@ -62,6 +62,7 @@ public class MigrantMatcher {
                         */
                         System.out.println("    ->(1) Registar Ajuda.");
                         System.out.println("    ->(2) Histórico de Ajudas.");
+                        System.out.println("    ->(3) Sair da aplicação.");
                         switch (src.nextInt()) {
 
                         /*
@@ -114,7 +115,7 @@ public class MigrantMatcher {
 
                                     path = "data/helpData/";
 
-                                    help = new HelpHandler("c", quantidade, type);
+                                    help = new HelpHandler("i", quantidade, type);
                                     help.createItem();
                                     helpTimeAndDate = System.currentTimeMillis();
                                     
@@ -136,9 +137,19 @@ public class MigrantMatcher {
                             }
 
                             break;
-                    }
 
-                            isValidNumber = false;
+                            case 2: 
+
+                                break;
+
+
+                            case 3:
+                                System.out.println("Obrigado pela utilização!");
+                                isValidNumber = false;
+                                break;
+                        }
+
+                            
                             
                         } catch (NumberFormatException e) {
                             System.out.println(e.getMessage());
