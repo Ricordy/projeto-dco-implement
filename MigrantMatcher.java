@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 ;
@@ -75,6 +77,8 @@ public class MigrantMatcher {
                             System.out.println("    ->Qualquer outro input para voltar");
                             switch(src.nextInt()){
 
+
+                                //User quer forncer casa
                                 case 1:
                                     
                                     System.out.println("Por-favor indique a região da casa.");
@@ -98,14 +102,10 @@ public class MigrantMatcher {
                                     sto.writeToFileUserHelp(path, help.type, help.regionItem, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
                                     sto.writeToUserFileListOfHelp("data/usersData/"+activeUser.phoneNumber+".csv", String.valueOf(ticketNumber), help.type);
                                     
-
-                                    
-
-
-
-
                                     break;
 
+
+                                //User quer forncer item
                                 case 2:
                                 
                                     System.out.println("Por-favor indique o item(numa palavra ou nomenclaturaDeVariaveis)");
@@ -128,25 +128,65 @@ public class MigrantMatcher {
                                     sto.writeToFileUserHelp(path, help.type, help.regionItem, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
                                     sto.writeToUserFileListOfHelp("data/usersData/"+activeUser.phoneNumber+".csv", String.valueOf(ticketNumber), help.type);
                                 
-
-                                    
-
-
                                     break;
 
                             }
 
                             break;
 
-                            case 2: 
+                        /*
+                         * Verificar histórico de ajudas
+                         */
+                        case 2: 
+                            System.out.println("Histórico de ajudas!");
+                            System.out.println("Selecione que histórico deseja ver:");
+                            System.out.println("    ->(1) Todas as ajudas (sem detalhe).");
+                            System.out.println("    ->(2) Todas as ajudas (sem detalhe, ordenadas por data).");
+                            System.out.println("    ->(3+x) Todas as ajudas de cada tipo! Dominio(x) = {i,c}.");
+                            System.out.println("    ->(4+x) Detalhes sobre ajuda especifica! Dominio(x) = {idTicket}");
+                            
+                            
+                            //Todo o conteudo do ficheiro correspondente ao user
+                            List<String[]> content = sto.readFile("data/usersData/"+activeUser.phoneNumber+".csv");
 
-                                break;
+
+                            String input = src.next();
+                            switch(input.charAt(0)){
+                                
+                                
+                                case '1':
+
+                                    content.forEach((line) -> {
+                                        if(line[0].equals("v")){
+                                            System.out.println("Histórico do utilizador: " + line[3]);
+                                            System.out.println("***********************************");
 
 
-                            case 3:
-                                System.out.println("Obrigado pela utilização!");
-                                isValidNumber = false;
-                                break;
+                                        }else{
+                                            System.out.println("* Tipo de ajuda: " + line[1] + ". ID: " + line[0]+". *");
+                                        }
+
+                                    });
+                                    
+
+                                    break;
+
+                            }
+                            
+
+
+
+
+
+                            break;
+
+
+                        case 3:
+                           
+                        
+                        System.out.println("Obrigado pela utilização!");
+                            isValidNumber = false;
+                            break;
                         }
 
                             
