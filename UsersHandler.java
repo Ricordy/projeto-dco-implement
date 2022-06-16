@@ -4,6 +4,8 @@ public class UsersHandler{
     //Variaveis comuns a todos os utilizadores 
     int phoneNumber;
     String name;
+    Migrant migrant;
+    Volunteer volunteer;
 
 
     // Para criar utilizadores apenas com phoneNumber
@@ -21,16 +23,15 @@ public class UsersHandler{
 
 
     //Criar objeto migrante
-    public Migrant createMigrant(UsersHandler user) {
-        Migrant novoMigrante = new Migrant(user.name, user.phoneNumber);
-        return novoMigrante;
+    public void createMigrant() {
+        migrant = new Migrant(name, phoneNumber);
+
     }
 
 
     //Criar objeto voluntario
-    public Volunteer createVolunteer(UsersHandler user) {
-        Volunteer novoVoluntario = new Volunteer(user.phoneNumber);
-        return novoVoluntario;
+    public void createVolunteer() {
+        volunteer = new Volunteer(phoneNumber);
     }
 
 

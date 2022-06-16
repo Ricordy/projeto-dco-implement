@@ -39,11 +39,15 @@ public class MigrantMatcher {
                         try {
                             int phoneNumber = src.nextInt();
                             activeUser = new UsersHandler(phoneNumber);
-                            Volunteer user = activeUser.createVolunteer(activeUser);
-                            
+                            activeUser.createVolunteer();
 
-                            System.out.println("Bem vindo ID/NumeroTelemovel: " + user.phoneNumber + "!");
-                            sto = new Storager("v", String.valueOf(user.phoneNumber), String.valueOf(user.phoneNumber));
+
+                            String path = user.phoneNumber;
+                
+
+                            System.out.println("Bem vindo ID/NumeroTelemovel: " + activeUser.phoneNumber + "!");
+                            sto = new Storager("v", String.valueOf(activeUser.phoneNumber), String.valueOf(activeUser.phoneNumber));
+                            sto.writeToFileUserInfo(path);
 
                             isValidNumber = false;
 
@@ -128,8 +132,8 @@ public class MigrantMatcher {
                             String[] userInfo = userInfoMeta.split(",", 2);
 
                             activeUser = new UsersHandler(Integer.parseInt(userInfo[1]), userInfo[0]);
-                            Migrant user = activeUser.createMigrant(activeUser);
-                            System.out.println("Bem vindo: " + user.name + "! ID/NumeroTelemovel: " + user.phoneNumber);
+                            activeUser.createMigrant();
+                            System.out.println("Bem vindo: " + activeUser.name + "! ID/NumeroTelemovel: " + activeUser.phoneNumber);
 
                             isValidNumber = false;
 
