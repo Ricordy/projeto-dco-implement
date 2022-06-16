@@ -56,17 +56,18 @@ public class MigrantMatcher {
                     /*
                      * Menu de Voluntário!
                      */
-                    System.out.println("(1) Registar Ajuda.");
-                    System.out.println("(2) Histórico de Ajudas.");
+                    System.out.println("    ->(1) Registar Ajuda.");
+                    System.out.println("    ->(2) Histórico de Ajudas.");
                     switch (src.nextInt()) {
 
                         /*
                          * Registar ajuda Utilizador deve indicar o tipo de ajuda e efetuar
                          */
                         case 1:
-                            System.out.println("(1) Fornecer casa.");
-                            System.out.println("(2) Oferecer item.");
-                            System.out.println("Qualquer outro inputa para voltar");
+                            System.out.println("Selecione o tipo de ajuda:");
+                            System.out.println("    ->(1) Fornecer casa.");
+                            System.out.println("    ->(2) Oferecer item.");
+                            System.out.println("    ->Qualquer outro input para voltar");
                             switch(src.nextInt()){
 
                                 case 1:
