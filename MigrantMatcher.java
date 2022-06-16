@@ -7,21 +7,23 @@ public class MigrantMatcher {
     public static void main(String[] agrs) {
 
         Scanner src = new Scanner(System.in);
+        Random rand;
         
+    
         UsersHandler activeUser = new UsersHandler(0);
-        boolean isValidNumber;
-
-
         Storager sto = new Storager();
-
-
         HelpHandler help;
+        
+        
+        boolean isRunning = true;
+        boolean isValidNumber;
+        int ticketNumber;
         long helpTimeAndDate;
 
 
 
 
-        boolean isRunning = true;
+    
         while (isRunning) {
 
             // Introdução e selecionar tipo de user
@@ -78,20 +80,21 @@ public class MigrantMatcher {
                                     String regiao = src.next();
                                     System.out.println("Por-favor indique a lotação da casa.");
                                     int lotacao = src.nextInt();
-
+                                   
+                                   
                                     path = "data/helpData/";
 
-                                    help = new HelpHandler("c", lotacao, regiao);
+                                    help = new HelpHandler("i", lotacao, regiao);
                                     help.creaAlojamento();
                                     helpTimeAndDate = System.currentTimeMillis();
                                     
                                     //Generate random name for file
-                                    Random rand = new Random();
-                                    int ticketNumber = rand.nextInt(999999);
+                                    rand = new Random();
+                                    ticketNumber = rand.nextInt(999999);
 
 
                                     path += ticketNumber+".csv";
-                                    sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+                                    sto.writeToFileUserHelp(path, help.type, help.regionItem, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
                                     sto.writeToUserFileListOfHelp("data/usersData/"+activeUser.phoneNumber+".csv", String.valueOf(ticketNumber), help.type);
                                     
 
@@ -104,13 +107,28 @@ public class MigrantMatcher {
 
                                 case 2:
                                 
-                                    System.out.println("Por favor indique que item pretende doar.");
-                                    String item = src.next();
-                                    System.out.println("Por favor diga a quantidade de item que pretende doar.");
+                                    System.out.println("Por-favor indique o item(numa palavra ou nomenclaturaDeVariaveis)");
+                                    String type = src.next();
+                                    System.out.println("Por-favor indique a quantidade do item.");
                                     int quantidade = src.nextInt();
-                                    help = new HelpHandler("i", quantidade, item);
+
+                                    path = "data/helpData/";
+
+                                    help = new HelpHandler("c", quantidade, type);
                                     help.createItem();
                                     helpTimeAndDate = System.currentTimeMillis();
+                                    
+                                    //Generate random name for file
+                                    rand = new Random();
+                                    ticketNumber = rand.nextInt(999999);
+
+
+                                    path += ticketNumber+".csv";
+                                    sto.writeToFileUserHelp(path, help.type, help.regionItem, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+                                    sto.writeToUserFileListOfHelp("data/usersData/"+activeUser.phoneNumber+".csv", String.valueOf(ticketNumber), help.type);
+                                
+
+                                    
 
 
                                     break;

@@ -1,6 +1,6 @@
 public class HelpHandler {
 
-    protected String region;
+    protected String regionItem; //Region if "c" Item if "i"
     protected String type;
     protected int quantity;
     protected Alojamento alojamento;
@@ -8,10 +8,10 @@ public class HelpHandler {
 
 
     //Registar o tipo de ajuda, alojamento, ou itens
-    public HelpHandler(String type, int quantity, String region){
+    public HelpHandler(String type, int quantity, String regionItem){
         this.type = type;
         this.quantity = quantity;
-        this.region = region;
+        this.regionItem = regionItem;
         
     }
 
@@ -21,7 +21,7 @@ public class HelpHandler {
      */
     public void creaAlojamento(){
         
-        alojamento = new Alojamento(region, quantity);
+        alojamento = new Alojamento(regionItem, quantity);
 
     }
 

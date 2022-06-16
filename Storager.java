@@ -176,6 +176,8 @@ public class Storager {
 
     }
 
+    
+
 
     /**
      * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv
