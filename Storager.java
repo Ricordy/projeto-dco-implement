@@ -16,6 +16,7 @@ public class Storager {
     String nome;
     String phoneNumber;
     String csvAttatched;
+    
 
 
     //Utilização geral
@@ -49,12 +50,11 @@ public class Storager {
 
     
     /** 
-     * Metodo chamado para escrever o conteudo atual no csv pretendido.
-     * @param toSafe
+     * Metodo chamado para escrever o conteudo atual sobre o utilizador no csv pretendido.
      * @param path
      */
     //
-    public void writeToFile(String path){
+    public void writeToFileUserInfo(String path){
         List<String[]> content = new ArrayList<>();
         String[] contentToAdd = new String[4];
 
@@ -76,7 +76,7 @@ public class Storager {
 
         
         
-        
+      
         
         //Escrever o conteudo pretendido no ficheiro
         
@@ -114,6 +114,91 @@ public class Storager {
  
     }
 
+
+
+        /** 
+     * Metodo chamado para escrever o conteudo atual sobre o utilizador no csv pretendido.
+     * @param path
+     * @param tipoAjuda "c" ou "i"
+     * @param localItem "localDaCasa" ou "nomeDoItem"
+     * @param lotQuantidade "lotacaoDaCasa" ou "quantidadeDeItens"
+     * @param data "data da oferta"
+     */
+    //
+    public void writeToFileUserHelp(String path, String tipoAjuda, String localItem, String lotQuantidade, String data){
+        List<String[]> content = new ArrayList<>();
+        String[] contentToAdd = new String[4];
+
+        
+        
+        //Ler todo o conteudo pré-existente no ficheiro.
+        
+        
+        try {
+            csvReader = new BufferedReader(new FileReader(path));
+            String line = "";
+            while ((line = csvReader.readLine()) != null) {
+                content.add(line.split(","));
+            }
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
+        
+        
+      
+        
+        //Escrever o conteudo pretendido no ficheiro
+        
+        
+        contentToAdd[0]=tipoAjuda;
+        contentToAdd[1]=localItem;
+        contentToAdd[2]=lotQuantidade;
+        contentToAdd[3]=data;
+
+        content.add(contentToAdd);
+
+        
+
+
+        try {
+            csvWriter = new BufferedWriter(new FileWriter(path));
+            
+            
+            //Transformar String[]... em String1,String2,String3,... e escrever 
+            for(String[] line:content){
+                String toWrite = String.join(",", line[0], line[1], line[2],line[3]);
+                csvWriter.write(toWrite);
+
+
+            }
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
+
+        
+
+        
+ 
+    }
+
+
+
+
+
+
+    
+    /** 
+     * 
+     * Criar csv pretendido em local nome
+     * exemplo: nome = "src/lcl/userinfo.csv"
+     * Guardado em: src/lcl/
+     * Nome: userinfo.csv
+     * @param name
+     */
     public void createCsv(String name){
         File csvFile = new File(name);
         try {
@@ -125,6 +210,24 @@ public class Storager {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    /** 
+     * LEr o ficheiro pretendido para históricos e confirmações 
+     * @param path
+     * @return List<String[]>
+     */
     public List<String[]> readFile(String path){
         List<String[]> content = new ArrayList<>();
         
@@ -144,6 +247,27 @@ public class Storager {
 
         return content;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
