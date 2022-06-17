@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -214,6 +215,66 @@ public class MigrantMatcher {
 
                         }
 
+                        /*
+                     * Menu de Migrante!
+                     */
+                    System.out.println("    ->(1) Registar pedido de Ajuda.");
+                    System.out.println("    ->(2) Histórico de Ajudas.");
+                    switch (src.nextInt()) {
+
+                        /*
+                         * Registar ajuda pedida pelo Utilizador deve indicar o tipo de ajuda requerido.
+                         */
+                        case 1:
+                            System.out.println("Selecione o tipo de ajuda pretendido:");
+                            System.out.println("    ->(1) Pedir alojamento.");
+                            System.out.println("    ->(2) Pedir item.");
+                            System.out.println("    ->Qualquer outro input para voltar");
+                            switch(src.nextInt()){
+
+                                case 1:
+                                    Storager lista = new Storager();
+                                    String[] listaCont = lista.listaFilesAtPath("data/helpData/");
+                                    for 
+                                    List<String[]> content = new ArrayList<>(lista.readFile("data/helpData/"));
+                                    System.out.println("Estes são os alojamentos disponíveis e as suas lotações: ");
+                                    for(String l : ){
+
+                                    }
+
+                                    String path = "data/helpData/";
+                                    //lista.readFile(path);
+                                    //System.out.println(lista.listaFilesAtPath("data/helpData/"));
+                                    
+
+                                    System.out.println("Por-favor indique o alojamento que pretende.");
+                                    String regiao = src.next();
+
+                                    
+
+                                    //help = new HelpHandler("c", lotacao, regiao);
+                                    //help.creaAlojamento();
+                                    //helpTimeAndDate = System.currentTimeMillis();
+                                    
+                                    //Generate random name for file
+                                    //Random rand = new Random();
+                                    //int ticketNumber = rand.nextInt(999999);
+
+
+                                    //path += ticketNumber+".csv";
+                                    //sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
+
+                                    
+
+
+
+
+                                    break;
+
+                                case 2:
+
+                            }
+                    }
                     }
 
                     break;
