@@ -303,6 +303,16 @@ public class Storager {
         return numeroFicheiros;
     }
 
+    public boolean fileExists(String path, String nomeFicheiro){
+        String ficheiros[] = listaFilesAtPath(path);
+        for(String s: ficheiros){
+            if(nomeFicheiro == s){
+                 return true;
+            }
+        };
+        return false;
+    }
+
     // Setters and getters;
 
     /**
