@@ -102,7 +102,7 @@ public class MigrantMatcher {
                                                         String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
                                                 sto.writeToUserFileListOfHelp(
                                                         "data/usersData/" + activeUser.phoneNumber + ".csv",
-                                                        String.valueOf(ticketNumber), help.type);
+                                                        String.valueOf(ticketNumber), help.type, "false");
 
                                                 break;
 
@@ -130,7 +130,7 @@ public class MigrantMatcher {
                                                         String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
                                                 sto.writeToUserFileListOfHelp(
                                                         "data/usersData/" + activeUser.phoneNumber + ".csv",
-                                                        String.valueOf(ticketNumber), help.type);
+                                                        String.valueOf(ticketNumber), help.type, "false");
 
                                                 break;
 
@@ -262,6 +262,11 @@ public class MigrantMatcher {
                                                     System.out.println("*************************************");
                                                     System.out.println("*                                   *");
 
+
+                                                    /*
+                                                    *   Informação especifica sobre ajudas de Alojamentos  
+                                                    *
+                                                    */
                                                     if (contentFromID.get(0)[0].equals("c")) {
                                                         System.out.println("* Tipo: Alojamento.   *");
                                                         System.out.println(
@@ -270,7 +275,14 @@ public class MigrantMatcher {
                                                                 + contentFromID.get(0)[2] + ".  *");
                                                         System.out.println(
                                                                 "* Data: " + simpleFormat.format(date) + ".  *");
-                                                    } else if (contentFromID.get(0)[0].equals("i")) {
+                                                    } 
+                                                    /*
+                                                    *   Informação especifica sobre ajudas de Items
+                                                    *
+                                                    */
+                                                    
+                                                    
+                                                    else if (contentFromID.get(0)[0].equals("i")) {
                                                         System.out.println("* Tipo: Item.   *");
                                                         System.out.println(
                                                                 "* O que é: " + contentFromID.get(0)[1] + ".  *");

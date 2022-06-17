@@ -121,7 +121,7 @@ public class Storager {
     public void writeToFileUserHelp(String path, String tipoAjuda, String localItem, String lotQuantidade,
             String data) {
         List<String[]> content = new ArrayList<>();
-        contentToAdd = new String[4];
+        contentToAdd = new String[5];
 
         // Ler todo o conteudo pré-existente no ficheiro.
 
@@ -144,6 +144,7 @@ public class Storager {
         contentToAdd[1] = localItem;
         contentToAdd[2] = lotQuantidade;
         contentToAdd[3] = data;
+        contentToAdd[4] = phoneNumber;
 
         content.add(contentToAdd);
 
@@ -153,13 +154,13 @@ public class Storager {
             // Transformar String[]... em String1,String2,String3,... e escrever
             if (content.size() == 1) {
                 String toWrite = contentToAdd[0] + "," + contentToAdd[1] + "," + contentToAdd[2] + ","
-                        + contentToAdd[3];
+                        + contentToAdd[3] + ","+ contentToAdd[4];
                 System.out.println(toWrite + " at path: " + path);
                 csvWriter.write(toWrite + '\n');
 
             } else {
                 content.forEach((line) -> {
-                    String toWrite = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
+                    String toWrite = line[0] + "," + line[1] + "," + line[2] + "," + line[3] + ","+ line[4];
 
                     System.out.println(toWrite + " at path: " + path);
                     csvWriter.write(toWrite + '\n');
@@ -189,7 +190,7 @@ public class Storager {
      * @param data          "data da oferta"
      */
     //
-    public void writeToUserFileListOfHelp(String path, String idTicket, String tipoAjuda) {
+    public void writeToUserFileListOfHelp(String path, String idTicket, String tipoAjuda, String wasAsked) {
         List<String[]> content = new ArrayList<>();
         contentToAdd = new String[4];
 
@@ -212,7 +213,7 @@ public class Storager {
 
         contentToAdd[0] = idTicket;
         contentToAdd[1] = tipoAjuda;
-        contentToAdd[2] = "null";
+        contentToAdd[2] = wasAsked;
         contentToAdd[3] = "null";
 
 
