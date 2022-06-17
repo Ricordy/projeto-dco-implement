@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 import java.io.File;
-=======
 import java.sql.Date;
 import java.text.SimpleDateFormat;
->>>>>>> f892d30cd76e3bd9688527c3bdb59f8f3814273c
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -263,8 +261,8 @@ public class MigrantMatcher {
                                                             .readFile("data/helpData/" + inputDivided[1] + ".csv");
                                                     date = new Date(Long.parseLong(contentFromID.get(0)[3]));
                                                     System.out.println("Informações sobre ticket: " + inputDivided[1]);
-                                                    System.out.println("*************************************");
-                                                    System.out.println("*                                   *");
+                                                    System.out.println("*******************************");
+                                                    System.out.println("*                             *");
 
 
                                                     /*
@@ -272,13 +270,13 @@ public class MigrantMatcher {
                                                     *
                                                     */
                                                     if (contentFromID.get(0)[0].equals("c")) {
-                                                        System.out.println("* Tipo: Alojamento.   *");
+                                                        System.out.println("* Tipo: Alojamento.           *");
                                                         System.out.println(
-                                                                "* Localizado em: " + contentFromID.get(0)[1] + ".  *");
+                                                                "* Localizado em: " + contentFromID.get(0)[1] + ".      *");
                                                         System.out.println("* Lotação máxima: "
-                                                                + contentFromID.get(0)[2] + ".  *");
+                                                                + contentFromID.get(0)[2] + ".          *");
                                                         System.out.println(
-                                                                "* Data: " + simpleFormat.format(date) + ".  *");
+                                                                "* Data: " + simpleFormat.format(date) + ".   *");
                                                     } 
                                                     /*
                                                     *   Informação especifica sobre ajudas de Items
@@ -287,16 +285,16 @@ public class MigrantMatcher {
                                                     
                                                     
                                                     else if (contentFromID.get(0)[0].equals("i")) {
-                                                        System.out.println("* Tipo: Item.   *");
+                                                        System.out.println("* Tipo: Item.                 *");
                                                         System.out.println(
-                                                                "* O que é: " + contentFromID.get(0)[1] + ".  *");
+                                                                "* O que é: " + contentFromID.get(0)[1] + ".    *");
                                                         System.out.println(
-                                                                "* Quantidade: " + contentFromID.get(0)[2] + ".  *");
+                                                                "* Quantidade: " + contentFromID.get(0)[2] + ".            *");
                                                         System.out.println(
-                                                                "* Data: " + simpleFormat.format(date) + ".  *");
+                                                                "* Data: " + simpleFormat.format(date) + ".   *");
                                                     }
-                                                    System.out.println("*                                   *");
-                                                    System.out.println("*************************************");
+                                                    System.out.println("*                             *");
+                                                    System.out.println("*******************************");
 
                                                     break;
 
@@ -383,12 +381,10 @@ public class MigrantMatcher {
                                 case 1:
                                     Storager lista = new Storager();
                                     String[] listaCont = lista.listaFilesAtPath("data/helpData/");
-                                    for 
+
                                     List<String[]> content = new ArrayList<>(lista.readFile("data/helpData/"));
                                     System.out.println("Estes são os alojamentos disponíveis e as suas lotações: ");
-                                    for(String l : ){
 
-                                    }
 
                                     String path = "data/helpData/";
                                     //lista.readFile(path);
