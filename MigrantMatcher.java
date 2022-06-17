@@ -264,32 +264,30 @@ public class MigrantMatcher {
                                                     System.out.println("*******************************");
                                                     System.out.println("*                             *");
 
-
                                                     /*
-                                                    *   Informação especifica sobre ajudas de Alojamentos  
-                                                    *
-                                                    */
+                                                     * Informação especifica sobre ajudas de Alojamentos
+                                                     *
+                                                     */
                                                     if (contentFromID.get(0)[0].equals("c")) {
                                                         System.out.println("* Tipo: Alojamento.           *");
-                                                        System.out.println(
-                                                                "* Localizado em: " + contentFromID.get(0)[1] + ".      *");
+                                                        System.out.println("* Localizado em: " + contentFromID.get(0)[1]
+                                                                + ".      *");
                                                         System.out.println("* Lotação máxima: "
                                                                 + contentFromID.get(0)[2] + ".          *");
                                                         System.out.println(
                                                                 "* Data: " + simpleFormat.format(date) + ".   *");
-                                                    } 
+                                                    }
                                                     /*
-                                                    *   Informação especifica sobre ajudas de Items
-                                                    *
-                                                    */
-                                                    
-                                                    
+                                                     * Informação especifica sobre ajudas de Items
+                                                     *
+                                                     */
+
                                                     else if (contentFromID.get(0)[0].equals("i")) {
                                                         System.out.println("* Tipo: Item.                 *");
                                                         System.out.println(
                                                                 "* O que é: " + contentFromID.get(0)[1] + ".    *");
-                                                        System.out.println(
-                                                                "* Quantidade: " + contentFromID.get(0)[2] + ".            *");
+                                                        System.out.println("* Quantidade: " + contentFromID.get(0)[2]
+                                                                + ".            *");
                                                         System.out.println(
                                                                 "* Data: " + simpleFormat.format(date) + ".   *");
                                                     }
@@ -350,8 +348,313 @@ public class MigrantMatcher {
 
                             activeUser = new UsersHandler(Integer.parseInt(userInfo[1]), userInfo[0]);
                             activeUser.createMigrant();
+
+                            String path = "data/usersData/" + activeUser.phoneNumber + ".csv";
+
+                            sto = new Storager("m", activeUser.name, String.valueOf(activeUser.phoneNumber),
+                                    String.valueOf(activeUser.phoneNumber));
+
+                            // Verificar se utilizador já existe senão criasse um ficheiro para este
+                            if (sto.fileExists("data/usersData/",
+                                    String.valueOf(activeUser.phoneNumber) + ".csv") == false) {
+                                sto.writeToFileUserInfo(path);
+                            }
+
                             System.out.println("Bem vindo: " + activeUser.name + "! ID/NumeroTelemovel: "
                                     + activeUser.phoneNumber);
+
+                            /*
+                             * Menu de Migrante!
+                             */
+
+
+                            String[] listaCont;
+                            List<String[]> atual;
+                            String id;
+
+                            boolean isUsingMigrant = true;
+                            while (isUsingMigrant) {
+                                System.out.println("    ->(1) Registar pedido de Ajuda.");
+                                System.out.println("    ->(2) Histórico de pedidos de Ajudas.");
+                                System.out.println("    ->(3) Sair da aplicação.");
+                                switch (src.nextInt()) {
+
+                                    /*
+                                     * Registar ajuda pedida pelo Utilizador deve indicar o tipo de ajuda requerido.
+                                     */
+                                    case 1:
+                                        System.out.println("Selecione o tipo de ajuda pretendido:");
+                                        System.out.println("    ->(1) Pedir alojamento.");
+                                        System.out.println("    ->(2) Pedir item.");
+                                        System.out.println("    ->Qualquer outro input para voltar");
+                                        switch (src.nextInt()) {
+
+
+                                            //Pedidos de alojamento.
+                                            case 1:
+                                               
+
+                                                listaCont = sto.listaFilesAtPath("data/helpData/");
+                                                
+                    
+                                                //Apresentar ao user todas as casas existentes
+                                                System.out.println("Estes são os alojamentos disponíveis e as suas lotações: ");
+                                                for (String s : listaCont) {
+                                                    atual = sto.readFile(s);
+                                                    if(atual.get(0)[0].equals("c")){
+                                                        System.out.println("Localização: "+ atual.get(0)[1]+ ", lotação máxima: " + atual.get(0)[2]+" e ID: " + s.replaceAll("[^0-9]", "")+".");
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                }
+                                                
+                                                System.out.println("Escolha o alojamento pretendido.");
+                                                id = src.next();
+
+                                                atual = sto.readFile("data/helpData/"+id+".csv");
+                                                
+                                                path = "data/helpRequests/";
+                                                helpTimeAndDate = System.currentTimeMillis();
+
+
+                                                // Generate random name for file
+                                                rand = new Random();
+                                                ticketNumber = rand.nextInt(999999 - 111111) + 111111;
+
+                                                path += ticketNumber + ".csv";
+                                                sto.writeToFileUserHelp(path, atual.get(0) [0], atual.get(0) [1],
+                                                        String.valueOf(atual.get(0) [2]), String.valueOf(helpTimeAndDate));
+                                                sto.writeToUserFileListOfHelp(
+                                                        "data/usersData/" + activeUser.phoneNumber + ".csv",
+                                                        String.valueOf(ticketNumber), atual.get(0)[0], "true");
+
+                                                break;
+
+                                            case 2:
+                                            
+                                                listaCont = sto.listaFilesAtPath("data/helpData/");
+
+                    
+                                                //Apresentar ao user todas as casas existentes
+                                                System.out.println("Estes são os itens disponíveis e as suas quantidades: ");
+                                                for (String s : listaCont) {
+                                                    atual = sto.readFile(s);
+                                                    if(atual.get(0)[0].equals("i")){
+                                                        System.out.println("Item: "+ atual.get(0)[1]+ ", Quantidade: " + atual.get(0)[2]+" e ID: " + s.replaceAll("[^0-9]", "")+".");
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                }
+                                                
+                                                System.out.println("Escolha o id do item pretendido.");
+                                                id = src.next();
+
+                                                atual = sto.readFile("data/helpData/"+id+".csv");
+                                                
+                                                path = "data/helpRequests/";
+                                                helpTimeAndDate = System.currentTimeMillis();
+
+
+                                                // Generate random name for file
+                                                rand = new Random();
+                                                ticketNumber = rand.nextInt(999999 - 111111) + 111111;
+
+                                                path += ticketNumber + ".csv";
+                                                sto.writeToFileUserHelp(path, atual.get(0) [0], atual.get(0) [1],
+                                                        String.valueOf(atual.get(0) [2]), String.valueOf(helpTimeAndDate));
+                                                sto.writeToUserFileListOfHelp(
+                                                        "data/usersData/" + activeUser.phoneNumber + ".csv",
+                                                        String.valueOf(ticketNumber), atual.get(0)[0], "true");
+                               
+                                                break;
+                                            
+
+
+
+                                        }
+                                        break;
+
+
+
+                                    //Historico de pedidos efetuados pelo utilizador
+                                    case 2:
+                                        System.out.println("Histórico de pedidos do utilizador: " + activeUser.name);
+                                        boolean isOnHistorico = true;
+                                        while (isOnHistorico) {
+
+                                            System.out.println("Selecione que histórico deseja ver:");
+                                            System.out.println(
+                                                    "    ->(1) Todas os pedidos de ajudas (sem detalhe, ordenadas por data).");
+                                            System.out.println(
+                                                    "    ->(2-x) Todas os pedidos de ajudas de cada tipo! Dominio(x) = {i,c}.");
+                                            System.out.println(
+                                                    "    ->(3-x) Detalhes sobre pedidos de ajuda especificos! Dominio(x) = {idTicket}");
+                                            System.out.println("    ->(4) Voltar");
+
+                                            // Todo o conteudo do ficheiro correspondente ao user
+                                            List<String[]> content = sto
+                                                    .readFile("data/usersData/" + activeUser.phoneNumber + ".csv");
+
+                                            String input = src.next();
+                                            switch (input.charAt(0)) {
+
+                                                /*
+                                                 * Histótico geral do utilizador
+                                                 *
+                                                 */
+
+                                                case '1':
+
+                                                    content.forEach((line) -> {
+                                                        if (line[0].equals("m")) {
+                                                            System.out.println("Histórico do utilizador: " + line[3]);
+                                                            System.out.println("*************************************");
+                                                            System.out.println("*                                   *");
+
+                                                        } else {
+                                                            System.out.println("* Tipo de ajuda: " + line[1] + ". ID: "
+                                                                    + line[0] + ".     *");
+                                                        }
+
+                                                    });
+                                                    System.out.println("*                                   *");
+                                                    System.out.println("*************************************");
+
+                                                    break;
+
+                                                /*
+                                                 * Histótico epecifico do utilizador
+                                                 *
+                                                 */
+
+                                                case '2':
+
+                                                    /*
+                                                     * Histótico especifico {i} do utilizador
+                                                     *
+                                                     */
+                                                    if (input.charAt(2) == 'i') {
+                                                        content.forEach((line) -> {
+                                                            if (line[0].equals("m")) {
+                                                                System.out.println("Histórico do utilizador: " + line[3]
+                                                                        + "! Especifico para Itens.");
+                                                                System.out.println(
+                                                                        "*************************************");
+                                                                System.out.println(
+                                                                        "*                                   *");
+
+                                                            } else if (line[1].equals("i")) {
+                                                                System.out.println("* Tipo de ajuda: " + line[1]
+                                                                        + ". ID: " + line[0] + ".     *");
+                                                            }
+
+                                                        });
+                                                        System.out.println("*                                   *");
+                                                        System.out.println("*************************************");
+
+                                                        /*
+                                                         * Histótico especifico {c} do utilizador
+                                                         *
+                                                         */
+                                                    } else if (input.charAt(2) == 'c') {
+                                                        content.forEach((line) -> {
+                                                            if (line[0].equals("m")) {
+                                                                System.out.println("Histórico do utilizador: " + line[3]
+                                                                        + "! Especifico para Alojamentos.");
+                                                                System.out.println(
+                                                                        "*************************************");
+                                                                System.out.println(
+                                                                        "*                                   *");
+
+                                                            } else if (line[1].equals("c")) {
+                                                                System.out.println("* Tipo de ajuda: " + line[1]
+                                                                        + ". ID: " + line[0] + ".     *");
+                                                            }
+
+                                                        });
+                                                        System.out.println("*                                   *");
+                                                        System.out.println("*************************************");
+
+                                                    }
+
+                                                    break;
+
+                                                /*
+                                                 * Informações especificas sobre ticket de ID especifico
+                                                 *
+                                                 */
+
+                                                case '3':
+                                                    String[] inputDivided = input.split("-");
+
+                                                    List<String[]> contentFromID = sto
+                                                            .readFile("data/helpRequests/" + inputDivided[1] + ".csv");
+                                                    date = new Date(Long.parseLong(contentFromID.get(0)[3]));
+                                                    System.out.println("Informações sobre ticket: " + inputDivided[1]);
+                                                    System.out.println("*******************************");
+                                                    System.out.println("*                             *");
+
+                                                    /*
+                                                     * Informação especifica sobre ajudas de Alojamentos
+                                                     *
+                                                     */
+                                                    if (contentFromID.get(0)[0].equals("c")) {
+                                                        System.out.println("* Tipo: Alojamento.           *");
+                                                        System.out.println("* Localizado em: " + contentFromID.get(0)[1]
+                                                                + ".      *");
+                                                        System.out.println("* Lotação máxima: "
+                                                                + contentFromID.get(0)[2] + ".          *");
+                                                        System.out.println(
+                                                                "* Data: " + simpleFormat.format(date) + ".   *");
+                                                    }
+                                                    /*
+                                                     * Informação especifica sobre ajudas de Items
+                                                     *
+                                                     */
+
+                                                    else if (contentFromID.get(0)[0].equals("i")) {
+                                                        System.out.println("* Tipo: Item.                 *");
+                                                        System.out.println(
+                                                                "* O que é: " + contentFromID.get(0)[1] + ".    *");
+                                                        System.out.println("* Quantidade: " + contentFromID.get(0)[2]
+                                                                + ".            *");
+                                                        System.out.println(
+                                                                "* Data: " + simpleFormat.format(date) + ".   *");
+                                                    }
+                                                    System.out.println("*                             *");
+                                                    System.out.println("*******************************");
+
+                                                    break;
+
+                                                case '4':
+                                                    isOnHistorico = false;
+                                                    break;
+
+                                                default:
+
+                                                    break;
+                                            }
+                                        
+
+                                        }
+                    
+
+                                        break;
+
+                                    case 3:
+
+                                        System.out.println("Esperemos que tenha consguido o desejado!");
+                                        isUsingMigrant = false;
+
+                                        break;
+
+                                    default:
+
+                                        break;
+                                }
+                            }
 
                             isValidNumber = false;
 
@@ -361,64 +664,6 @@ public class MigrantMatcher {
 
                         }
 
-                        /*
-                     * Menu de Migrante!
-                     */
-                    System.out.println("    ->(1) Registar pedido de Ajuda.");
-                    System.out.println("    ->(2) Histórico de Ajudas.");
-                    switch (src.nextInt()) {
-
-                        /*
-                         * Registar ajuda pedida pelo Utilizador deve indicar o tipo de ajuda requerido.
-                         */
-                        case 1:
-                            System.out.println("Selecione o tipo de ajuda pretendido:");
-                            System.out.println("    ->(1) Pedir alojamento.");
-                            System.out.println("    ->(2) Pedir item.");
-                            System.out.println("    ->Qualquer outro input para voltar");
-                            switch(src.nextInt()){
-
-                                case 1:
-                                    Storager lista = new Storager();
-                                    String[] listaCont = lista.listaFilesAtPath("data/helpData/");
-
-                                    List<String[]> content = new ArrayList<>(lista.readFile("data/helpData/"));
-                                    System.out.println("Estes são os alojamentos disponíveis e as suas lotações: ");
-
-
-                                    String path = "data/helpData/";
-                                    //lista.readFile(path);
-                                    //System.out.println(lista.listaFilesAtPath("data/helpData/"));
-                                    
-
-                                    System.out.println("Por-favor indique o alojamento que pretende.");
-                                    String regiao = src.next();
-
-                                    
-
-                                    //help = new HelpHandler("c", lotacao, regiao);
-                                    //help.creaAlojamento();
-                                    //helpTimeAndDate = System.currentTimeMillis();
-                                    
-                                    //Generate random name for file
-                                    //Random rand = new Random();
-                                    //int ticketNumber = rand.nextInt(999999);
-
-
-                                    //path += ticketNumber+".csv";
-                                    //sto.writeToFileUserHelp(path, help.type, help.region, String.valueOf(help.quantity), String.valueOf(helpTimeAndDate));
-
-                                    
-
-
-
-
-                                    break;
-
-                                case 2:
-
-                            }
-                    }
                     }
 
                     break;
