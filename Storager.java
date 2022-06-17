@@ -108,8 +108,8 @@ public class Storager {
     }
 
     /**
-     * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv
-     * pretendido (path).
+     * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv pretendido
+     * (path).
      * 
      * @param path
      * @param tipoAjuda     "c" ou "i"
@@ -153,14 +153,14 @@ public class Storager {
 
             // Transformar String[]... em String1,String2,String3,... e escrever
             if (content.size() == 1) {
-                String toWrite = contentToAdd[0] + "," + contentToAdd[1] + "," + contentToAdd[2] + ","
-                        + contentToAdd[3] + ","+ contentToAdd[4];
+                String toWrite = contentToAdd[0] + "," + contentToAdd[1] + "," + contentToAdd[2] + "," + contentToAdd[3]
+                        + "," + contentToAdd[4];
                 System.out.println(toWrite + " at path: " + path);
                 csvWriter.write(toWrite + '\n');
 
             } else {
                 content.forEach((line) -> {
-                    String toWrite = line[0] + "," + line[1] + "," + line[2] + "," + line[3] + ","+ line[4];
+                    String toWrite = line[0] + "," + line[1] + "," + line[2] + "," + line[3] + "," + line[4];
 
                     System.out.println(toWrite + " at path: " + path);
                     csvWriter.write(toWrite + '\n');
@@ -178,10 +178,9 @@ public class Storager {
 
     }
 
-
     /**
-     * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv
-     * pretendido (path).
+     * Metodo chamado para escrever o conteudo atual sobre a ajuda no csv pretendido
+     * (path).
      * 
      * @param path
      * @param tipoAjuda     "c" ou "i"
@@ -215,7 +214,6 @@ public class Storager {
         contentToAdd[1] = tipoAjuda;
         contentToAdd[2] = wasAsked;
         contentToAdd[3] = "null";
-
 
         content.add(contentToAdd);
 
@@ -292,39 +290,38 @@ public class Storager {
         return content;
     }
 
-    
-    /** 
+    /**
      * @param path
      * @return String[]
      */
-    public String[] listaFilesAtPath(String path){
+    public String[] listaFilesAtPath(String path) {
         File numFiles = new File(path);
-        File contents[]= numFiles.listFiles();
+        File contents[] = numFiles.listFiles();
         String numeroFicheiros[] = new String[contents.length];
         int i = 0;
-        for(File file: contents){
+        for (File file : contents) {
             numeroFicheiros[i] = file.toString();
             i++;
-        } 
+        }
         return numeroFicheiros;
     }
 
-    
-    /** 
+    /**
      * @param path
      * @param nomeFicheiro
      * @return boolean
      */
-    public boolean fileExists(String path, String nomeFicheiro){
+    public boolean fileExists(String path, String nomeFicheiro) {
         String ficheiros[] = listaFilesAtPath(path);
-        for(String s: ficheiros){
+        for (String s : ficheiros) {
             System.out.println(s);
-            System.out.println(path+nomeFicheiro);
-            if(s.equals(path+nomeFicheiro)){
+            System.out.println(path + nomeFicheiro);
+            if (s.equals(path + nomeFicheiro)) {
                 System.out.println("Iguais");
-                 return true;
+                return true;
             }
-        };
+        }
+        ;
         return false;
     }
 

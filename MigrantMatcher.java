@@ -8,6 +8,10 @@ import java.util.Random;
 import java.util.Scanner;;
 
 public class MigrantMatcher {
+
+    /**
+     * @param agrs
+     */
     public static void main(String[] agrs) {
 
         Scanner src = new Scanner(System.in);
@@ -367,7 +371,6 @@ public class MigrantMatcher {
                              * Menu de Migrante!
                              */
 
-
                             String[] listaCont;
                             List<String[]> atual;
                             String id;
@@ -389,42 +392,41 @@ public class MigrantMatcher {
                                         System.out.println("    ->Qualquer outro input para voltar");
                                         switch (src.nextInt()) {
 
-
-                                            //Pedidos de alojamento.
+                                            // Pedidos de alojamento.
                                             case 1:
-                                               
 
                                                 listaCont = sto.listaFilesAtPath("data/helpData/");
-                                                
-                    
-                                                //Apresentar ao user todas as casas existentes
-                                                System.out.println("Estes são os alojamentos disponíveis e as suas lotações: ");
+
+                                                // Apresentar ao user todas as casas existentes
+                                                System.out.println(
+                                                        "Estes são os alojamentos disponíveis e as suas lotações: ");
                                                 for (String s : listaCont) {
                                                     atual = sto.readFile(s);
-                                                    if(atual.get(0)[0].equals("c")){
-                                                        System.out.println("Localização: "+ atual.get(0)[1]+ ", lotação máxima: " + atual.get(0)[2]+" e ID: " + s.replaceAll("[^0-9]", "")+".");
-                                                        
+                                                    if (atual.get(0)[0].equals("c")) {
+                                                        System.out.println("Localização: " + atual.get(0)[1]
+                                                                + ", lotação máxima: " + atual.get(0)[2] + " e ID: "
+                                                                + s.replaceAll("[^0-9]", "") + ".");
+
                                                     }
-                                                    
-                                                    
+
                                                 }
-                                                
+
                                                 System.out.println("Escolha o alojamento pretendido.");
                                                 id = src.next();
 
-                                                atual = sto.readFile("data/helpData/"+id+".csv");
-                                                
+                                                atual = sto.readFile("data/helpData/" + id + ".csv");
+
                                                 path = "data/helpRequests/";
                                                 helpTimeAndDate = System.currentTimeMillis();
-
 
                                                 // Generate random name for file
                                                 rand = new Random();
                                                 ticketNumber = rand.nextInt(999999 - 111111) + 111111;
 
                                                 path += ticketNumber + ".csv";
-                                                sto.writeToFileUserHelp(path, atual.get(0) [0], atual.get(0) [1],
-                                                        String.valueOf(atual.get(0) [2]), String.valueOf(helpTimeAndDate));
+                                                sto.writeToFileUserHelp(path, atual.get(0)[0], atual.get(0)[1],
+                                                        String.valueOf(atual.get(0)[2]),
+                                                        String.valueOf(helpTimeAndDate));
                                                 sto.writeToUserFileListOfHelp(
                                                         "data/usersData/" + activeUser.phoneNumber + ".csv",
                                                         String.valueOf(ticketNumber), atual.get(0)[0], "true");
@@ -432,53 +434,49 @@ public class MigrantMatcher {
                                                 break;
 
                                             case 2:
-                                            
+
                                                 listaCont = sto.listaFilesAtPath("data/helpData/");
 
-                    
-                                                //Apresentar ao user todas as casas existentes
-                                                System.out.println("Estes são os itens disponíveis e as suas quantidades: ");
+                                                // Apresentar ao user todas as casas existentes
+                                                System.out.println(
+                                                        "Estes são os itens disponíveis e as suas quantidades: ");
                                                 for (String s : listaCont) {
                                                     atual = sto.readFile(s);
-                                                    if(atual.get(0)[0].equals("i")){
-                                                        System.out.println("Item: "+ atual.get(0)[1]+ ", Quantidade: " + atual.get(0)[2]+" e ID: " + s.replaceAll("[^0-9]", "")+".");
-                                                        
+                                                    if (atual.get(0)[0].equals("i")) {
+                                                        System.out.println("Item: " + atual.get(0)[1] + ", Quantidade: "
+                                                                + atual.get(0)[2] + " e ID: "
+                                                                + s.replaceAll("[^0-9]", "") + ".");
+
                                                     }
-                                                    
-                                                    
+
                                                 }
-                                                
+
                                                 System.out.println("Escolha o id do item pretendido.");
                                                 id = src.next();
 
-                                                atual = sto.readFile("data/helpData/"+id+".csv");
-                                                
+                                                atual = sto.readFile("data/helpData/" + id + ".csv");
+
                                                 path = "data/helpRequests/";
                                                 helpTimeAndDate = System.currentTimeMillis();
-
 
                                                 // Generate random name for file
                                                 rand = new Random();
                                                 ticketNumber = rand.nextInt(999999 - 111111) + 111111;
 
                                                 path += ticketNumber + ".csv";
-                                                sto.writeToFileUserHelp(path, atual.get(0) [0], atual.get(0) [1],
-                                                        String.valueOf(atual.get(0) [2]), String.valueOf(helpTimeAndDate));
+                                                sto.writeToFileUserHelp(path, atual.get(0)[0], atual.get(0)[1],
+                                                        String.valueOf(atual.get(0)[2]),
+                                                        String.valueOf(helpTimeAndDate));
                                                 sto.writeToUserFileListOfHelp(
                                                         "data/usersData/" + activeUser.phoneNumber + ".csv",
                                                         String.valueOf(ticketNumber), atual.get(0)[0], "true");
-                               
+
                                                 break;
-                                            
-
-
 
                                         }
                                         break;
 
-
-
-                                    //Historico de pedidos efetuados pelo utilizador
+                                    // Historico de pedidos efetuados pelo utilizador
                                     case 2:
                                         System.out.println("Histórico de pedidos do utilizador: " + activeUser.name);
                                         boolean isOnHistorico = true;
@@ -636,10 +634,8 @@ public class MigrantMatcher {
 
                                                     break;
                                             }
-                                        
 
                                         }
-                    
 
                                         break;
 
