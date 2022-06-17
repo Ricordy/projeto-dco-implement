@@ -291,6 +291,11 @@ public class Storager {
         return content;
     }
 
+    
+    /** 
+     * @param path
+     * @return String[]
+     */
     public String[] listaFilesAtPath(String path){
         File numFiles = new File(path);
         File contents[]= numFiles.listFiles();
@@ -303,10 +308,19 @@ public class Storager {
         return numeroFicheiros;
     }
 
+    
+    /** 
+     * @param path
+     * @param nomeFicheiro
+     * @return boolean
+     */
     public boolean fileExists(String path, String nomeFicheiro){
         String ficheiros[] = listaFilesAtPath(path);
         for(String s: ficheiros){
-            if(nomeFicheiro == s){
+            System.out.println(s);
+            System.out.println(path+nomeFicheiro);
+            if(s.equals(path+nomeFicheiro)){
+                System.out.println("Iguais");
                  return true;
             }
         };
